@@ -1,0 +1,31 @@
+# Ignore Eclipse workspace metadata
+.metadata/
+
+# Ignore STM32CubeIDE build files
+*.o
+*.bin
+*.elf
+*.hex
+*.map
+*.dep
+*.d
+*.su
+*.cyclo
+*.out
+*.list
+*.srec
+*.bak
+*.swp
+
+# Ignore STM32CubeIDE settings
+*.launch
+*.log
+*.settings
+*.cproject
+*.mxproject
+*.project
+
+# Ignore compiled object files and debug output
+/Debug/
+/Release/
+
