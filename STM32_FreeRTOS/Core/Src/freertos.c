@@ -56,6 +56,13 @@ const osThreadAttr_t TaskLoRa_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
+/* Definitions for TaskServoMotor */
+osThreadId_t TaskServoMotorHandle;
+const osThreadAttr_t TaskServoMotor_attributes = {
+  .name = "TaskServoMotor",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -65,6 +72,7 @@ void main_application(void *argument);
 void Task_Ultrasonic_Handler(void *argument);
 void Task_OLED_Handler(void *argument);
 void Task_LoRa_Handler(void *argument);
+void Task_ServoMotor_Handler(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -104,7 +112,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* creation of TaskMainApp */
-  //TaskMainAppHandle = osThreadNew(main_application, NULL, &TaskMainApp_attributes);
+  TaskMainAppHandle = osThreadNew(main_application, NULL, &TaskMainApp_attributes);
 
   /* creation of TaskUltrasonic */
   TaskUltrasonicHandle = osThreadNew(Task_Ultrasonic_Handler, NULL, &TaskUltrasonic_attributes);
@@ -113,7 +121,10 @@ void MX_FREERTOS_Init(void) {
   TaskOLEDHandle = osThreadNew(Task_OLED_Handler, NULL, &TaskOLED_attributes);
 
   /* creation of TaskLoRa */
-  //TaskLoRaHandle = osThreadNew(Task_LoRa_Handler, NULL, &TaskLoRa_attributes);
+  TaskLoRaHandle = osThreadNew(Task_LoRa_Handler, NULL, &TaskLoRa_attributes);
+
+  /* creation of TaskServoMotor */
+  TaskServoMotorHandle = osThreadNew(Task_ServoMotor_Handler, NULL, &TaskServoMotor_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* USER CODE END RTOS_THREADS */
@@ -163,6 +174,24 @@ __weak void Task_LoRa_Handler(void *argument)
     osDelay(1);
   }
   /* USER CODE END Task_LoRa_Handler */
+}
+
+/* USER CODE BEGIN Header_Task_ServoMotor_Handler */
+/**
+* @brief Function implementing the TaskServoMotor thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_Task_ServoMotor_Handler */
+__weak void Task_ServoMotor_Handler(void *argument)
+{
+  /* USER CODE BEGIN Task_ServoMotor_Handler */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END Task_ServoMotor_Handler */
 }
 
 /* Private application code --------------------------------------------------*/
