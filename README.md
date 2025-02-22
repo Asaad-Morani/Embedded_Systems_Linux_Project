@@ -109,4 +109,7 @@ The project is divided into **two main parts**:
 
 🚀 **This README ensures that anyone visiting My GitHub can quickly understand and run the project!** 🎯
 
+![Project Diagram](Embedded_Project_Image.excalidraw.png)
+
+
 
