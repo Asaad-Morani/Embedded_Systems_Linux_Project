@@ -63,6 +63,13 @@ const osThreadAttr_t TaskServoMotor_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for TaskGPS */
+osThreadId_t TaskGPSHandle;
+const osThreadAttr_t TaskGPS_attributes = {
+  .name = "TaskGPS",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -73,6 +80,7 @@ void Task_Ultrasonic_Handler(void *argument);
 void Task_OLED_Handler(void *argument);
 void Task_LoRa_Handler(void *argument);
 void Task_ServoMotor_Handler(void *argument);
+void Task_GPS_Handler(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -112,19 +120,22 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* creation of TaskMainApp */
-  TaskMainAppHandle = osThreadNew(main_application, NULL, &TaskMainApp_attributes);
+//  TaskMainAppHandle = osThreadNew(main_application, NULL, &TaskMainApp_attributes);
+//
+//  /* creation of TaskUltrasonic */
+//  TaskUltrasonicHandle = osThreadNew(Task_Ultrasonic_Handler, NULL, &TaskUltrasonic_attributes);
+//
+//  /* creation of TaskOLED */
+//  TaskOLEDHandle = osThreadNew(Task_OLED_Handler, NULL, &TaskOLED_attributes);
+//
+//  /* creation of TaskLoRa */
+//  TaskLoRaHandle = osThreadNew(Task_LoRa_Handler, NULL, &TaskLoRa_attributes);
+//
+//  /* creation of TaskServoMotor */
+//  TaskServoMotorHandle = osThreadNew(Task_ServoMotor_Handler, NULL, &TaskServoMotor_attributes);
 
-  /* creation of TaskUltrasonic */
-  TaskUltrasonicHandle = osThreadNew(Task_Ultrasonic_Handler, NULL, &TaskUltrasonic_attributes);
-
-  /* creation of TaskOLED */
-  TaskOLEDHandle = osThreadNew(Task_OLED_Handler, NULL, &TaskOLED_attributes);
-
-  /* creation of TaskLoRa */
-  TaskLoRaHandle = osThreadNew(Task_LoRa_Handler, NULL, &TaskLoRa_attributes);
-
-  /* creation of TaskServoMotor */
-  TaskServoMotorHandle = osThreadNew(Task_ServoMotor_Handler, NULL, &TaskServoMotor_attributes);
+  /* creation of TaskGPS */
+  TaskGPSHandle = osThreadNew(Task_GPS_Handler, NULL, &TaskGPS_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* USER CODE END RTOS_THREADS */
@@ -192,6 +203,24 @@ __weak void Task_ServoMotor_Handler(void *argument)
     osDelay(1);
   }
   /* USER CODE END Task_ServoMotor_Handler */
+}
+
+/* USER CODE BEGIN Header_Task_GPS_Handler */
+/**
+* @brief Function implementing the TaskGPS thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_Task_GPS_Handler */
+__weak void Task_GPS_Handler(void *argument)
+{
+  /* USER CODE BEGIN Task_GPS_Handler */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END Task_GPS_Handler */
 }
 
 /* Private application code --------------------------------------------------*/

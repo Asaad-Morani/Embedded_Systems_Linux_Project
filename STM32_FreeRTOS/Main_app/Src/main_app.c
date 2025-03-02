@@ -14,7 +14,8 @@ void main_application(void *argument) {
 	// Start Ultrasonic Sensor Task (optional coordination logic can go here)
 	printf("\r Main application started.\n");
 	for (;;) {
+		printf("\rIm inside main app \n");
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  // Toggle another LED (for example)
-		osDelay(1000);  // 1-second delay
+		osDelay(500);  // 1-second delay
 	}
 }
