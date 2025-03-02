@@ -66,7 +66,7 @@ main-build: STM32_FreeRTOS.elf secondary-outputs
 
 # Tool invocations
 STM32_FreeRTOS.elf STM32_FreeRTOS.map: $(OBJS) $(USER_OBJS) /home/asaad/Desktop/Embedded_Systems_Linux_Project/STM32_FreeRTOS/STM32F756ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "STM32_FreeRTOS.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/asaad/Desktop/Embedded_Systems_Linux_Project/STM32_FreeRTOS/STM32F756ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_FreeRTOS.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "STM32_FreeRTOS.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/asaad/Desktop/Embedded_Systems_Linux_Project/STM32_FreeRTOS/STM32F756ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_FreeRTOS.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
